@@ -29,12 +29,12 @@ public class Service {
     }
 
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public Dto getAData(){
         return repo.findAFetchFirst();
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public Dto getBData(){
         return repo.findBFetchFirst();
     }

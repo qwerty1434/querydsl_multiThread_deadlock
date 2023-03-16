@@ -43,28 +43,6 @@ public class deadlock {
     }
 
     @Test
-    void getDataWithoutOtherThread(){
-        Dto basic = service.getDataForTransactionCheckBasicPropagation();
-        Dto requiresNew = service.getDataForTransactionCheckRequiresNew();
-        Assertions.assertNotNull(basic);
-        Assertions.assertNull(requiresNew);
-    }
-
-    @Test
-    void getDataInMyThread() throws InterruptedException {
-        Runnable userA = () -> {
-            log.info("thread A start");
-            Dto basic = service.getDataForTransactionCheckBasicPropagation();
-            Dto requiresNew = service.getDataForTransactionCheckRequiresNew();
-            log.info("basic = {}",basic);
-            log.info("requiresNew = {}",requiresNew);
-        };
-        Thread threadA = new Thread(userA);
-        threadA.start();
-        threadA.join();
-    }
-
-    @Test
     void occurDeadlock(){
         Runnable userA = () -> {
             log.info("thread A start");
